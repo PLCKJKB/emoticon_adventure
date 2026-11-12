@@ -10,6 +10,13 @@ Emoticon Adventure is a text-based game written in Python. Explore and fight you
 3. Run the Python file containing the game.
 4. The game starts automatically through `start_adventure()`.
 
+## Needed Imports:
+
+1. Module `random`
+2. Module `itertools`
+3. Module `time`
+4. Module `pick`
+
 ## Controls
 
 - **Enter:** Progress through dialogue.
