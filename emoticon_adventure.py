@@ -22,7 +22,7 @@ maxhealth = 100
 
 gold = 0
 
-permissions = [] #travel,fight
+permissions = [] 
 
 def say(text,talker): #function for stylized talking bubbles
 
@@ -213,7 +213,7 @@ def tutors_lair():
             elif result == 3:
                 print("The mirror door leads you to a room filled with mirrors. In the middle is a radiating light beam. Stepping into it fills your head with knowledge.")
                 endgame(input(""))
-                print("You've learned 'Reflective Guard'! Now, 50 percent of damage you block gets reflected back at the enemy!")
+                print("You've learned 'Reflective Guard'! Now, 50 percent of damage you block gets reflected back at the enemy! But it cannot kill it!")
                 enchantments.append("Reflective Guard")
 
             elif result == 4:
@@ -560,7 +560,7 @@ def tutors_lair():
                 say("But I won't give a fluff on what anyone thinks about my actions!","\  /\nO><O\n\__/")
 
             elif word == 3:
-                say("That grump? He didn't want to help me, so I locked him up. \nThat's it. \nI don't know what revenge quest he has but that's my side of the story.")
+                say("That grump? He didn't want to help me, so I locked him up. \nThat's it. \nI don't know what revenge quest he has but that's my side of the story.","O><O\n----")
 
             endgame(input(""))
             print("BOSSFIGHT: FINAL PHASE: The Tutor")
@@ -1060,15 +1060,14 @@ def fight(enemyhp,maxenemydmg,minenemydmg,defenddownvalue,defendupvalue,trait= "
             if bullseye == True:
                 NextTurn = True
 
+        if trait == "swift":
+            enemyattacks = 2
+        else:
+            enemyattacks = 1
 
 
-        if enemyhp > 0:
-            if trait == "swift":
-                enemyattacks = 2
-            else:
-                enemyattacks = 1
-
-            for attack in range(enemyattacks):
+        for attack in range(enemyattacks):
+            if enemyhp > 0:
                 if attack == 1:
                     print("The enemy is swift, and is attacking again!")
                 else:
@@ -1092,8 +1091,8 @@ def fight(enemyhp,maxenemydmg,minenemydmg,defenddownvalue,defendupvalue,trait= "
 
                 if "Reflective Guard" in enchantments and defended > 0:
                     print(f"Your Reflective Guard reflects {defended // 2} damage!")
-                    enemyhp = round(enemyhp - (defended // 2),1)
-                    print(f"Enemy health: {max(enemyhp,0)}/{maxenemyhp}")
+                    enemyhp = round(max(enemyhp - (defended // 2),1),1)
+                    print(f"Enemy health: {max(enemyhp,1)}/{maxenemyhp}")
 
                 if "Stone Skin" in enchantments:
                     hplost = max(round(hplost * 0.8),0)
@@ -1105,14 +1104,14 @@ def fight(enemyhp,maxenemydmg,minenemydmg,defenddownvalue,defendupvalue,trait= "
 
                 print(f"You took {hplost} damage!")
                 endgame(input(""))
-                print(f"HP: {health}/{maxhealth}")
-                if health <= 0:
-                    print("You were defeated.")
-                    return("defeat")
+                print(f"HP: {max(health,0)}/{maxhealth}")
+            if health <= 0:
+                print("You were defeated.")
+                return("defeat")
                 print("\nYour turn to attack.")
-            else:
-                print("The enemy is defeated.")
-                return("victory")
+        else:
+            print("The enemy is defeated.")
+            return("victory")
             endgame(input(""))
 
     print("Come back stronger and with a weapon.")
@@ -1178,7 +1177,7 @@ def start_adventure():
         endgame(input(""))
     else:
         say("Bruh. No way you died on the tutorial.","8[")
-        quit()
+        defeat()
 
     say("So, what did you think of the tutorial?","8]")
     endgame(input(""))
@@ -1195,9 +1194,8 @@ def start_adventure():
     tutors_dungeon_cell()
     return
 
-
-start_adventure()
-
+defeat()
+#start_adventure()
 
 
 
