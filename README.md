@@ -7,8 +7,8 @@ Emoticon Adventure is a text-based game written in Python. Explore and fight you
 
 1. Make sure Python is installed.
 2. Open the project in your code editor or terminal.
-3. Run the Python file containing the game.
-4. The game starts automatically through `start_adventure()`.
+3. Run the Python file containing the game. (`emoticon_adventure.py`)
+5. The game starts automatically through `start_adventure()`.
 
 ## Needed Imports:
 
