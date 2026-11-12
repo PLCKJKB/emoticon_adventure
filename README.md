@@ -15,7 +15,7 @@ Emoticon Adventure is a text-based game written in Python. Explore and fight you
 1. Module `random`
 2. Module `itertools`
 3. Module `time`
-4. Module `pick`
+4. Module `pick` (download with `pip install pick`)
 
 ## Controls
 
