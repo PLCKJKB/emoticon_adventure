@@ -42,7 +42,7 @@ def valid_output(question,options):
     answer, index = pick(options,question,"-->")
     return(index+1)
 
-# End
+# End function
 
 def defeat():
     global  enchantments, inventory, friends, name, gold, maxhealth, health
@@ -61,6 +61,7 @@ def defeat():
         ["Yes","No"]
     )
     if choice == 1:
+        print("Restarting...")
         enchantments = []
         inventory = []
         friends = []
@@ -70,6 +71,7 @@ def defeat():
         name = ""
         start_adventure()
     elif choice == 2:
+        print("Goodbye!")
         quit()
     
 
@@ -78,23 +80,6 @@ def defeat():
 visited = []
 
 # DESTINATION FUNCTIONS
-def start_location():
-    if lastlocation == "start":
-        print("You didn't really go anywhere")
-    else:
-        print("You arrived at the start area.")
-
-def city():
-    if lastlocation == "city":
-        print("You didn't really go anywhere")
-    else:
-        print("You arrived at Emoticon City.")
-
-def forest():
-    if lastlocation == "forest":
-        print("You didn't really go anywhere")
-    else:
-        print("You arrived at Emoticon Forest.")
 
 def tutors_lair():
     global gold, health,maxhealth
@@ -131,15 +116,15 @@ def tutors_lair():
                 print("You walk to the next door.")
                 
             elif result == 2:
-                print("You freeze the moment you enter. An Emoticon beast, \njust like the one you saw in the dungeon is standing right in front of you.")
+                print("You freeze the moment you enter. An Emoticon beast, \njust like the one you saw in the dungeon is standing right in front of you. \nBut this one seems stronger.")
                 endgame(input(""))
                 say("You shall pewish in the name of the tutor!",">:D")
-                result = fight(20,3,1,1,2)
+                result = fight(30,5,2,1,3)
                 if result == "defeat":
                     defeat()
                     return
                 print("From the dust of the beast, coins roll out. It seems that these domesticated beasts carry around money.")
-                goldgained =  random.randint(1,5)
+                goldgained =  random.randint(5,10)
                 gold += goldgained
                 endgame(input(""))
                 print("You walk to the next door.")
@@ -794,7 +779,7 @@ def tutors_dungeon_cell():
                     ["Why are you in here?","Who is the tutor?","Nothing."]
                 )
                 if result == 1:
-                    say("I refused to lend him some equipment for his trainees. \nI used to be a blacksmith you know.",">;|")
+                    say("I refused to lend him some equipment for his trainees. \nI used to be a blacksmith you know.\nWhen I get my hands on him...",">;|")
                     endgame(input(""))
                 elif result == 2:
                     say("The tutor is some entitled bozo who thinks that because he teaches you something \nhe suddenly can do anything he wants.",">;|")
@@ -868,7 +853,7 @@ def dmgeffect(dmgdealt,mincritrange,maxcritrange):
     while True:
         try:
             print("Guess the number, the closer you get, the more powerful your attack!")
-            answer = int(input(f"Guess, it's between {maxcritrange} and {mincritrange}:"))
+            answer = int(input(f"Guess, it's between {mincritrange} and {maxcritrange}:"))
             if answer == number:
                 if "Deadly Bullseye" in enchantments:
                     dmgdealt = round(dmgdealt * 2.5,1)
@@ -1108,11 +1093,11 @@ def fight(enemyhp,maxenemydmg,minenemydmg,defenddownvalue,defendupvalue,trait= "
             if health <= 0:
                 print("You were defeated.")
                 return("defeat")
-                print("\nYour turn to attack.")
-        else:
+            print("\nYour turn to attack.")
+        if enemyhp <= 0:
             print("The enemy is defeated.")
             return("victory")
-            endgame(input(""))
+            
 
     print("Come back stronger and with a weapon.")
 
@@ -1175,7 +1160,7 @@ def start_adventure():
         health = 100
         print("Your health returned to 100")
         endgame(input(""))
-    else:
+    elif result == "defeat": #even though its impossible, it makes a good failsafe
         say("Bruh. No way you died on the tutorial.","8[")
         defeat()
 
@@ -1194,8 +1179,8 @@ def start_adventure():
     tutors_dungeon_cell()
     return
 
-defeat()
-#start_adventure()
+
+start_adventure()
 
 
 
