@@ -387,6 +387,7 @@ def tutors_lair():
             say("What did you do down there?!","_ -\n.3.")
             endgame(input(""))
             say("Ah, nevermind. I see you have new cash, and my stocks restocked. Want a peak?","-3-")
+            endgame(input(""))
             while True:
                 result = valid_output(
                     f"What do you want to buy? You have {gold} gold.",
@@ -1035,7 +1036,7 @@ def fight(enemyhp,maxenemydmg,minenemydmg,defenddownvalue,defendupvalue,trait= "
 
                 if trait == "chonky":
                     dmgdealt = round(dmgdealt * 0.75,1)
-                    print(f"Your enemy's 'chunky' trait makes it take {dmgdealt} damage!")
+                    print(f"Your enemy's 'chunky' trait makes it take only {dmgdealt} damage!")
 
                 enemyhp = round(enemyhp - dmgdealt,1)
                 print(f"Enemy health: {max(enemyhp,0)}/{maxenemyhp}")
@@ -1093,10 +1094,11 @@ def fight(enemyhp,maxenemydmg,minenemydmg,defenddownvalue,defendupvalue,trait= "
             if health <= 0:
                 print("You were defeated.")
                 return("defeat")
-            print("\nYour turn to attack.")
         if enemyhp <= 0:
             print("The enemy is defeated.")
             return("victory")
+        else:
+            print("\nYour turn to attack.")
             
 
     print("Come back stronger and with a weapon.")
